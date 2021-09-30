@@ -1,17 +1,15 @@
-function index() {
-    let app = document.getElementById('app'); 
-    let h3 = document.createElement('h3');
-    h3.innerHTML = 'Prayer Times';
-
-    app.append(h3);
-
-    userLocation();
+function prayerTimes(latitude, longitude) {
+    fetch('http://api.aladhan.com/v1/calendar?latitude='+latitude+'&longitude='+longitude+'&method=2')
+    .then(response => response.json())
+    .then(function(response){
+        let date = new Date().getDate() - 1;
+        console.log(date);
+        console.log(response.data[date]);
+    });
 }
 
-index();
-
 function success(position){
-    console.log(position);
+    prayerTimes(position.coords.latitude, position.coords.longitude);
 }
 
 function error(){
@@ -25,3 +23,15 @@ function userLocation() {
         navigator.geolocation.getCurrentPosition(success, error);
     }
 }
+
+function index() {
+    let app = document.getElementById('app'); 
+    let h3 = document.createElement('h3');
+    h3.innerHTML = 'Prayer Times';
+
+    app.append(h3);
+
+    userLocation();
+}
+
+index();
