@@ -32,21 +32,27 @@ function prayerTimes(latitude, longitude) {
 }
 
 function success(position) { 
+    
     prayerTimes(position.coords.latitude, position.coords.longitude);
+
 }
 
 function error() {
+
     // set default geolocation to Jakarta
     prayerTimes('-6.200000', '106.816666');
+
 }
 
 function userLocation() {
+
     if(!navigator.geolocation) {
         alert('Geolocation tidak didukung di browser anda');
     } 
     else {
         navigator.geolocation.getCurrentPosition(success, error);
     }
+
 }
 
 function index() {
